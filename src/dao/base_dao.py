@@ -1,5 +1,3 @@
-from time import sleep
-
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update, delete
 
@@ -57,3 +55,14 @@ class BaseDAO:
         result = await self.db.execute(stmt)
         await self.db.commit()
         return result.scalar_one_or_none()
+
+    async def delete_by_primary_key(self, key_value):
+        """通过主删除"""
+        stmt = delete(self.model).where(getattr(self.model, self.primary_key) == key_value)
+        await self.db.execute(stmt)
+        await self.db.commit()
+        return True
+
+
+
+

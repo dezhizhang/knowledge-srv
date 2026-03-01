@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 def get_db_url() -> str:
     """postgresql连接字符串"""
-    return "postgresql+asynpg://postgres:12345678@localhost:5432/postgres"
+    return "postgresql+asyncpg://zhangdezhi:12345678@localhost:5432/knowledge"
 
 
 engine = create_async_engine(
