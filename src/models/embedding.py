@@ -1,0 +1,17 @@
+from pickle import FRAME
+
+from sqlalchemy import TIMESTAMP,Column
+from sqlalchemy.dialects.postgresql import UUID,JSON,TSVECTOR
+from pgvector.sqlalchemy import Vector
+from src.models.base import Base
+
+class Embedding(Base):
+    __tablename_ = 'embedding'
+    uuid = Column(UUID, primary_key=True, index=True)
+    file_id = Column(UUID)
+    chunk_id = Column(UUID)
+    collection_id = Column(UUID)
+    embedding_vector = Column(Vector)
+    search_vector = Column(TSVECTOR)
+    cmetadata = Column(JSON)
+    create_time = Column(TIMESTAMP(timezone=True),nullable=False)
