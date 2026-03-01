@@ -1,4 +1,6 @@
 import argparse
+import sys
+
 import uvicorn
 
 if __name__ == "__main__":
@@ -18,5 +20,16 @@ if __name__ == "__main__":
         help="port bind the server to (default: 8080)"
     )
 
-    uvicorn.run("server:app", host="0.0.0.0", port=8000,reload=True)
+    args = parser.parse_args()
 
+    try:
+        uvicorn.run(
+            "src.main:app",
+            host=args.host,
+            port=args.port,
+            reload=True
+        )
+
+    except Exception as e:
+        print(e)
+        sys.exit(1)
